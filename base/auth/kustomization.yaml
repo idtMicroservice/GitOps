@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - deployment.yaml
+  - service.yaml
+configMapGenerator:
+  - name: auth-config
+    literals:
+      - JWT_ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=60
+      - CORS_ORIGINS=https://idt.example.com

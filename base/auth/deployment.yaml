@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: auth-db
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: auth-db
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: auth-db
+          image: idt/auth-db:replace-me
+          ports:
+            - name: http
+              containerPort: 8001
+          envFrom:
+            - configMapRef:
+                name: auth-config
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: idt-auth
+                  key: DATABASE_URL
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: idt-auth
+                  key: JWT_SECRET
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          startupProbe:
+            httpGet:
+              path: /health
+              port: http
+            failureThreshold: 30
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          volumeMounts:
+            - name: rds-ca
+              mountPath: /certs
+              readOnly: true
+      volumes:
+        - name: rds-ca
+          configMap:
+            name: rds-ca
+            items:
+              - key: global-bundle.pem
+                path: rds-ca.pem

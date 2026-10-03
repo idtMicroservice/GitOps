@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: industrial-digital-twin
+spec:
+  sourceRepos:
+    - https://github.com/Devops-communityy/industrial-digital-twin.git
+  destinations:
+    - namespace: idt-demo
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"

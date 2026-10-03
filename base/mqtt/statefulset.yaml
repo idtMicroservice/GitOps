@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mqtt
+spec:
+  serviceName: mqtt
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mqtt
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mqtt
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1883
+        runAsGroup: 1883
+        fsGroup: 1883
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: mqtt
+          image: eclipse-mosquitto:2
+          command: [mosquitto, -c, /mosquitto/config/mosquitto.conf]
+          ports:
+            - name: mqtt
+              containerPort: 1883
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
+          readinessProbe:
+            tcpSocket:
+              port: mqtt
+          livenessProbe:
+            tcpSocket:
+              port: mqtt
+          volumeMounts:
+            - name: config
+              mountPath: /mosquitto/config
+              readOnly: true
+            - name: data
+              mountPath: /mosquitto/data
+      volumes:
+        - name: config
+          configMap:
+            name: mqtt-config
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ReadWriteOnce]
+        resources:
+          requests:
+            storage: 1Gi
