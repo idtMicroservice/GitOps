@@ -1,13 +1,34 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: industrial-digital-twin-demo
+  name: idt-rds-config
 spec:
   project: industrial-digital-twin
   source:
     repoURL: https://github.com/Devops-communityy/industrial-digital-twin.git
     targetRevision: main
-    path: deployment/gitops/overlays/demo
+    path: deployment/gitops/config/rds
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idt-demo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: idt-frontend
+spec:
+  project: industrial-digital-twin
+  source:
+    repoURL: https://github.com/Devops-communityy/industrial-digital-twin.git
+    targetRevision: main
+    path: deployment/gitops/base/frontend
   destination:
     server: https://kubernetes.default.svc
     namespace: idt-demo
@@ -23,3 +44,103 @@ spec:
         duration: 5s
         factor: 2
         maxDuration: 3m
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: idt-backend
+spec:
+  project: industrial-digital-twin
+  source:
+    repoURL: https://github.com/Devops-communityy/industrial-digital-twin.git
+    targetRevision: main
+    path: deployment/gitops/base/backend
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idt-demo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: idt-auth
+spec:
+  project: industrial-digital-twin
+  source:
+    repoURL: https://github.com/Devops-communityy/industrial-digital-twin.git
+    targetRevision: main
+    path: deployment/gitops/base/auth
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idt-demo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: idt-mqtt
+spec:
+  project: industrial-digital-twin
+  source:
+    repoURL: https://github.com/Devops-communityy/industrial-digital-twin.git
+    targetRevision: main
+    path: deployment/gitops/base/mqtt
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idt-demo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: idt-kafka
+spec:
+  project: industrial-digital-twin
+  source:
+    repoURL: https://github.com/Devops-communityy/industrial-digital-twin.git
+    targetRevision: main
+    path: deployment/gitops/base/kafka
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idt-demo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: idt-simulator
+spec:
+  project: industrial-digital-twin
+  source:
+    repoURL: https://github.com/Devops-communityy/industrial-digital-twin.git
+    targetRevision: main
+    path: deployment/gitops/base/simulator
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idt-demo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
