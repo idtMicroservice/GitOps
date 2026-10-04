@@ -7,8 +7,8 @@ resources:
   - ../../base/simulator
 images:
   - name: idt/frontend
-    newName: ghcr.io/replace-me/idt-frontend
-    newTag: replace-with-git-sha
+    newName: docker.io/manojkrishnappa/idt-frontend
+    newTag: '47b8ebc'
   - name: idt/backend
     newName: ghcr.io/replace-me/idt-backend
     newTag: replace-with-git-sha
