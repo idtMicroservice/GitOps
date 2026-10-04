@@ -13,8 +13,8 @@ images:
     newName: docker.io/manojkrishnappa/idt-backend
     newTag: '52a8202'
   - name: idt/auth-db
-    newName: ghcr.io/replace-me/idt-auth-db
-    newTag: replace-with-git-sha
+    newName: docker.io/manojkrishnappa/idt-auth-db
+    newTag: '279fe55'
   - name: idt/simulator
     newName: ghcr.io/replace-me/idt-simulator
     newTag: replace-with-git-sha
