@@ -4,3 +4,7 @@ resources:
   - deployment.yaml
   - service.yaml
   # - ingress.yaml
+images:
+  - name: manojkrishnappa/idt-frontend
+    newName: docker.io/manojkrishnappa/idt-frontend
+    newTag: "47b8ebc"

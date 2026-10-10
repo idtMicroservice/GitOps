@@ -23,7 +23,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: backend
-          image: manojkrishnappa/idt-backend:52a8202
+          image: manojkrishnappa/idt-backend
           ports:
             - name: http
               containerPort: 8000

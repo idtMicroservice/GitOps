@@ -3,3 +3,7 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
+images:
+  - name: manojkrishnappa/idt-backend
+    newName: docker.io/manojkrishnappa/idt-backend
+    newTag: "52a8202"

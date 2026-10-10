@@ -3,3 +3,7 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
+images:
+  - name: manojkrishnappa/idt-auth-db
+    newName: docker.io/manojkrishnappa/idt-auth-db
+    newTag: "279fe55"
