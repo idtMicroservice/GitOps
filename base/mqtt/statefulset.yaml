@@ -55,7 +55,10 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: mqtt-config
+            name: idt-config
+            items:
+              - key: MOSQUITTO_CONFIG
+                path: mosquitto.conf
   volumeClaimTemplates:
     - metadata:
         name: data

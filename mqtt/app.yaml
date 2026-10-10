@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: idt-mqtt
+spec:
+  project: industrial-digital-twin
+  source:
+    repoURL: https://github.com/Devops-communityy/industrial-digital-twin.git
+    targetRevision: main
+    path: deployment/gitops/base/mqtt
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: idt-demo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

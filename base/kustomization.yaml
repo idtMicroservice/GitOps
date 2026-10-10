@@ -6,3 +6,4 @@ resources:
   - auth
   - mqtt
   - kafka
+  - simulator

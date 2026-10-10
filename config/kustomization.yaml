@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+generatorOptions:
+  disableNameSuffixHash: true
+configMapGenerator:
+  - name: idt-config
+    files:
+      - RDS_CA_PEM=rds/global-bundle.pem
+      - MOSQUITTO_CONFIG=mosquitto.conf
+    literals:
+      - JWT_ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=60
+      - CORS_ORIGINS=https://idt.example.com
+      - MQTT_HOST=mqtt
+      - MQTT_PORT=1883
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - KAFKA_TELEMETRY_TOPIC=telemetry.raw
+      - KAFKA_CONSUMER_GROUP=backend-telemetry-consumer
+      - DEMO_SIMULATION_ENABLED=false

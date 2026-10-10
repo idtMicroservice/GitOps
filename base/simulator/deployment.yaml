@@ -26,9 +26,15 @@ spec:
           image: idt/simulator:replace-me
           env:
             - name: MQTT_HOST
-              value: mqtt
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: MQTT_HOST
             - name: MQTT_PORT
-              value: "1883"
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: MQTT_PORT
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true

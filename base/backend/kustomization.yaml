@@ -3,14 +3,3 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
-configMapGenerator:
-  - name: backend-config
-    literals:
-      - MQTT_HOST=mqtt
-      - MQTT_PORT=1883
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-      - KAFKA_TELEMETRY_TOPIC=telemetry.raw
-      - KAFKA_CONSUMER_GROUP=backend-telemetry-consumer
-      - JWT_ALGORITHM=HS256
-      - CORS_ORIGINS=https://idt.example.com
-      - DEMO_SIMULATION_ENABLED=false

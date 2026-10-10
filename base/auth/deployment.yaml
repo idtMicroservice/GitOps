@@ -25,10 +25,22 @@ spec:
           ports:
             - name: http
               containerPort: 8001
-          envFrom:
-            - configMapRef:
-                name: auth-config
           env:
+            - name: JWT_ALGORITHM
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: JWT_ALGORITHM
+            - name: ACCESS_TOKEN_EXPIRE_MINUTES
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: ACCESS_TOKEN_EXPIRE_MINUTES
+            - name: CORS_ORIGINS
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: CORS_ORIGINS
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
@@ -72,7 +84,7 @@ spec:
       volumes:
         - name: rds-ca
           configMap:
-            name: rds-ca
+            name: idt-config
             items:
-              - key: global-bundle.pem
+              - key: RDS_CA_PEM
                 path: rds-ca.pem

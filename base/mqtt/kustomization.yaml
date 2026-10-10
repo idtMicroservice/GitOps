@@ -4,7 +4,3 @@ resources:
   - statefulset.yaml
   - service.yaml
   - networkpolicy.yaml
-configMapGenerator:
-  - name: mqtt-config
-    files:
-      - mosquitto.conf

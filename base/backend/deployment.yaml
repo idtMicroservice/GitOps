@@ -27,10 +27,47 @@ spec:
           ports:
             - name: http
               containerPort: 8000
-          envFrom:
-            - configMapRef:
-                name: backend-config
           env:
+            - name: MQTT_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: MQTT_HOST
+            - name: MQTT_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: MQTT_PORT
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: KAFKA_BOOTSTRAP_SERVERS
+            - name: KAFKA_TELEMETRY_TOPIC
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: KAFKA_TELEMETRY_TOPIC
+            - name: KAFKA_CONSUMER_GROUP
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: KAFKA_CONSUMER_GROUP
+            - name: JWT_ALGORITHM
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: JWT_ALGORITHM
+            - name: CORS_ORIGINS
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: CORS_ORIGINS
+            - name: DEMO_SIMULATION_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  name: idt-config
+                  key: DEMO_SIMULATION_ENABLED
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
