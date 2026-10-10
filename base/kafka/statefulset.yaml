@@ -24,16 +24,19 @@ spec:
       containers:
         - name: kafka
           image: docker.redpanda.com/redpandadata/redpanda:v24.1.10
-          command: [redpanda]
+          command:
+          - rpk
           args:
-            - start
-            - --smp=1
-            - --memory=512M
-            - --overprovisioned
-            - --node-id=0
-            - --check=false
-            - --kafka-addr=PLAINTEXT://0.0.0.0:9092
-            - --advertise-kafka-addr=PLAINTEXT://kafka:9092
+          - redpanda
+          - start
+          - --smp=1
+          - --memory=512M
+          - --reserve-memory=0M
+          - --overprovisioned
+          - --node-id=0
+          - --check=false
+          - --kafka-addr=PLAINTEXT://0.0.0.0:9092
+          - --advertise-kafka-addr=PLAINTEXT://kafka:9092
           ports:
             - name: kafka
               containerPort: 9092
