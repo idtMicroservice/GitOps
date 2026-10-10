@@ -23,7 +23,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: simulator
-          image: manojkrishnappa/idt-simulator
+          image: manojkrishnappa/idtsimulator
           env:
             - name: MQTT_HOST
               valueFrom:

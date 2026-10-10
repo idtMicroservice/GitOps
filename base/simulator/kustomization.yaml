@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
   - deployment.yaml
 images:
-  - name: manojkrishnappa/idt-simulator
-    newName: docker.io/manojkrishnappa/idt-simulator
-    newTag: "52a8202"
+  - name: manojkrishnappa/idtsimulator
+    newName: docker.io/manojkrishnappa/idtsimulator
+    newTag: d91bf32
