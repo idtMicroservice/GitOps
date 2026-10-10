@@ -5,4 +5,4 @@ resources:
 images:
   - name: manojkrishnappa/idt-simulator
     newName: docker.io/manojkrishnappa/idt-simulator
-    newTag: "52a8202"
+    newTag: d91bf32
