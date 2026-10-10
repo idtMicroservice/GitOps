@@ -4,7 +4,7 @@ metadata:
   name: industrial-digital-twin
 spec:
   sourceRepos:
-    - https://github.com/Devops-communityy/industrial-digital-twin.git
+    - https://github.com/idtMicroservice/GitOps.git
   destinations:
     - namespace: idt-demo
       server: https://kubernetes.default.svc

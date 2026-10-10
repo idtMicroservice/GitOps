@@ -31,7 +31,7 @@ curl --fail --location https://truststore.pki.rds.amazonaws.com/global/global-bu
 
 ## Deploy
 
-The manifests assume this repository is `deployment/gitops` in `https://github.com/Devops-communityy/industrial-digital-twin.git` on branch `main`. Update each `app.yaml` and `argocd/project.yaml` if the repository or branch changes.
+The manifests assume this repository is `https://github.com/idtMicroservice/GitOps.git` on branch `main`. Each Application points to its service directory under `base/`, and the shared configuration Application points to `config/`.
 
 After pushing the manifests and creating the Secret, register the project and all Applications:
 

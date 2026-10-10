@@ -5,9 +5,9 @@ metadata:
 spec:
   project: industrial-digital-twin
   source:
-    repoURL: https://github.com/Devops-communityy/industrial-digital-twin.git
+    repoURL: https://github.com/idtMicroservice/GitOps.git
     targetRevision: main
-    path: deployment/gitops/base/mqtt
+    path: base/mqtt
   destination:
     server: https://kubernetes.default.svc
     namespace: idt-demo
